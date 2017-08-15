@@ -5,25 +5,49 @@
     <title>photo</title>
 </head>
 <body>
-<div id="content" style="width: 400px;height: 400px;">
-    <img src="img/kido.jpg" class="pic">
+<div id="content" style="width: 100px;height: 300px;background: palegreen;text-align: center">
+    <img src="img/kido.jpg">
 </div>
 </body>
 <script>
-//
-   window.onload= function () {
-       var box_width=parseInt(getComputedStyle(document.getElementById("content"))["width"]);
-       var box_height=parseInt(getComputedStyle(document.getElementById("content"))["height"]);
-       var pic_width=parseInt(getComputedStyle(document.getElementsByClassName("pic")[0])["width"]);
-       var pic_height=parseInt(getComputedStyle(document.getElementsByClassName("pic")[0])["height"]);
-       var rate_width=box_width/pic_width;
-       var rate_height=box_height/pic_height;
+window.onload=function(){
+    changeImg();
+}
+    function changeImg(){
+        var get_content=document.getElementById("content");
+        var get_img=get_content.getElementsByTagName("img")[0];
+        var real_W=get_content.offsetWidth-(get_content.clientLeft*2);
+        var real_H=get_content.offsetHeight-(get_content.clientLeft*2);
+        var img_W=get_img.width;
+        var img_H=get_img.height;
+        var rate_W=img_W/real_W;
+        var rate_H=img_H/real_H;
+        if(rate_W>=1&&rate_H<=1){
+            img_W=parseInt(img_W/rate_W);
+            img_H=parseInt(img_H/rate_W);
+            get_img.width=img_W;
+            get_img.height=img_H;
+        }else if(rate_W<=1&&rate_H>=1){
+            img_W=parseInt(img_W/rate_H);
+            img_H=parseInt(img_H/rate_H);
+            get_img.width=img_W;
+            get_img.height=img_H;
+        }else if(rate_W>=1&&rate_H>=1){
+              if(rate_W>rate_H){
+                  img_W=parseInt(img_W/rate_W);
+                  img_H=parseInt(img_H/rate_W);
+              }else{
+                  img_W=parseInt(img_W/rate_H);
+                  img_H=parseInt(img_H/rate_H);
+              }
+            get_img.width=img_W;
+            get_img.height=img_H;
+        }if(get_img.height<real_H){
+            var distance=parseInt((real_H-get_img.height)/2);
+            get_img.style.marginTop=distance.toString()+"px";
+        }
 
-       if(rate_height>rate_width){
-           pic_width*=rate_height;
-       }
-   }
-
+    }
 
 
 </script>
