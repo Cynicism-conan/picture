@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>photo</title>
+</head>
+<body>
+<div id="content" style="width: 400px;height: 400px;">
+    <img src="img/kido.jpg" class="pic">
+</div>
+</body>
+<script>
+//
+   window.onload= function () {
+       var box_width=parseInt(getComputedStyle(document.getElementById("content"))["width"]);
+       var box_height=parseInt(getComputedStyle(document.getElementById("content"))["height"]);
+       var pic_width=parseInt(getComputedStyle(document.getElementsByClassName("pic")[0])["width"]);
+       var pic_height=parseInt(getComputedStyle(document.getElementsByClassName("pic")[0])["height"]);
+       var rate_width=box_width/pic_width;
+       var rate_height=box_height/pic_height;
+
+       if(rate_height>rate_width){
+           pic_width*=rate_height;
+       }
+   }
+
+
+
+</script>
+</html>
